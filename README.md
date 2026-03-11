@@ -1,29 +1,29 @@
-# Task Manager API
+# Task Manager Frontend
 
-Backend REST API for the **Task Manager** application.
-Built with **Spring Boot**, **PostgreSQL**, and **Docker**.
+Frontend for the **Task Manager application** built with **React + Vite + TailwindCSS**.
+
+The application allows users to manage tasks visually with a modern interface.
 
 ---
 
 ## 🚀 Features
 
-* Create tasks
-* List all tasks
-* Update task status
-* Cancel tasks
-* Delete tasks
-* REST API architecture
-* Docker containerization
+* Add tasks
+* View tasks
+* Task status management
+* Task details modal
+* Task progress tracking
+* Responsive UI
+* Modern dark design
 
 ---
 
 ## 🛠️ Tech Stack
 
-* Java 21
-* Spring Boot
-* Spring Data JPA
-* PostgreSQL
-* Maven
+* React
+* Vite
+* TailwindCSS
+* JavaScript
 * Docker
 
 ---
@@ -31,73 +31,52 @@ Built with **Spring Boot**, **PostgreSQL**, and **Docker**.
 ## 📂 Project Structure
 
 ```
-task-api
+task-api-frontend
 │
-├── controller
-│   └── TaskController
+├── components
+│   ├── Header
+│   ├── Footer
+│   ├── TaskCard
+│   ├── TaskForm
+│   ├── TaskDetailsModal
+│   └── ProgressBar
 │
-├── service
-│   └── TaskService
+├── services
+│   └── taskService.js
 │
-├── repository
-│   └── TaskRepository
-│
-├── model
-│   ├── Task
-│   └── TaskStatus
-│
-└── dto
-    └── StatusUpdateRequest
+└── App.jsx
 ```
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ Environment variables
 
-Application configuration is located in:
-
-```
-src/main/resources/application.properties
-```
-
-Example:
+Create a `.env` file:
 
 ```
-server.port=9000
-
-spring.datasource.url=jdbc:postgresql://postgres-db:5432/taskdb
-spring.datasource.username=postgres
-spring.datasource.password=matar
-
-spring.jpa.hibernate.ddl-auto=update
+VITE_API_URL=http://localhost:9000/api/tasks
 ```
 
 ---
 
 ## ▶️ Run locally
 
-### 1️⃣ Clone repository
+### 1️⃣ Install dependencies
 
 ```
-git clone https://github.com/yourusername/task-manager.git
+npm install
 ```
 
-### 2️⃣ Navigate to backend
+### 2️⃣ Run development server
 
 ```
-cd task-api
+npm run dev
 ```
 
-### 3️⃣ Run application
+Application runs on:
 
 ```
-mvn spring-boot:run
-```
-
-The API will start on:
-
-```
-http://localhost:9000
+http://localhost:5173
 ```
 
 ---
@@ -107,84 +86,45 @@ http://localhost:9000
 Build the image:
 
 ```
-docker build -t task-api .
+docker build -t task-frontend .
 ```
 
-Run the container:
+Run container:
 
 ```
-docker run -p 9000:9000 task-api
-```
-
----
-
-## 📡 API Endpoints
-
-### Get all tasks
-
-```
-GET /api/tasks
-```
-
-### Create a task
-
-```
-POST /api/tasks
-```
-
-### Delete a task
-
-```
-DELETE /api/tasks/{id}
-```
-
-### Cancel a task
-
-```
-PUT /api/tasks/{id}/cancel
-```
-
-### Update task status
-
-```
-PUT /api/tasks/{id}/status
-```
-
-Example request body:
-
-```json
-{
-  "status": "DONE"
-}
+docker run -p 3000:80 task-frontend
 ```
 
 ---
 
-## 🧪 Example response
+## 🔗 Backend API
 
-```json
-{
-  "id": 1,
-  "title": "Develop Backend",
-  "description": "Implement API",
-  "status": "IN_PROGRESS"
-}
+The frontend communicates with the backend API:
+
+```
+http://localhost:9000/api/tasks
 ```
 
 ---
 
-## 🐳 Docker Compose
+## 🎨 UI Features
 
-The backend is designed to work with:
+* Dark mode design
+* Animated progress bar
+* Task status badges
+* Dropdown actions menu
+* Responsive layout
 
-* PostgreSQL
-* Frontend React
+---
 
-Using:
+## 📸 Preview
 
-```
-docker-compose up --build
-```
+Task manager dashboard with:
+
+* task cards
+* progress tracking
+* interactive menus
+* modal forms
 
 ---
 
