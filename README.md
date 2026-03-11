@@ -1,16 +1,193 @@
-# React + Vite
+# Task Manager API
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Backend REST API for the **Task Manager** application.
+Built with **Spring Boot**, **PostgreSQL**, and **Docker**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+* Create tasks
+* List all tasks
+* Update task status
+* Cancel tasks
+* Delete tasks
+* REST API architecture
+* Docker containerization
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* Java 21
+* Spring Boot
+* Spring Data JPA
+* PostgreSQL
+* Maven
+* Docker
+
+---
+
+## 📂 Project Structure
+
+```
+task-api
+│
+├── controller
+│   └── TaskController
+│
+├── service
+│   └── TaskService
+│
+├── repository
+│   └── TaskRepository
+│
+├── model
+│   ├── Task
+│   └── TaskStatus
+│
+└── dto
+    └── StatusUpdateRequest
+```
+
+---
+
+## ⚙️ Configuration
+
+Application configuration is located in:
+
+```
+src/main/resources/application.properties
+```
+
+Example:
+
+```
+server.port=9000
+
+spring.datasource.url=jdbc:postgresql://postgres-db:5432/taskdb
+spring.datasource.username=postgres
+spring.datasource.password=matar
+
+spring.jpa.hibernate.ddl-auto=update
+```
+
+---
+
+## ▶️ Run locally
+
+### 1️⃣ Clone repository
+
+```
+git clone https://github.com/yourusername/task-manager.git
+```
+
+### 2️⃣ Navigate to backend
+
+```
+cd task-api
+```
+
+### 3️⃣ Run application
+
+```
+mvn spring-boot:run
+```
+
+The API will start on:
+
+```
+http://localhost:9000
+```
+
+---
+
+## 🐳 Run with Docker
+
+Build the image:
+
+```
+docker build -t task-api .
+```
+
+Run the container:
+
+```
+docker run -p 9000:9000 task-api
+```
+
+---
+
+## 📡 API Endpoints
+
+### Get all tasks
+
+```
+GET /api/tasks
+```
+
+### Create a task
+
+```
+POST /api/tasks
+```
+
+### Delete a task
+
+```
+DELETE /api/tasks/{id}
+```
+
+### Cancel a task
+
+```
+PUT /api/tasks/{id}/cancel
+```
+
+### Update task status
+
+```
+PUT /api/tasks/{id}/status
+```
+
+Example request body:
+
+```json
+{
+  "status": "DONE"
+}
+```
+
+---
+
+## 🧪 Example response
+
+```json
+{
+  "id": 1,
+  "title": "Develop Backend",
+  "description": "Implement API",
+  "status": "IN_PROGRESS"
+}
+```
+
+---
+
+## 🐳 Docker Compose
+
+The backend is designed to work with:
+
+* PostgreSQL
+* Frontend React
+
+Using:
+
+```
+docker-compose up --build
+```
+
+---
+
+## 📜 License
+
+MIT License
