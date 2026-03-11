@@ -26,3 +26,12 @@ export const cancelTask = async (id) => {
     method: "PUT"
   });
 };
+export const updateStatus = async (id, status) => {
+  await fetch(`${API}/${id}/status`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ status })
+  });
+};

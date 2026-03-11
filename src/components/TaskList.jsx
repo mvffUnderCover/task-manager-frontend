@@ -3,7 +3,7 @@ import TaskForm from "./TaskForm";
 import TaskCard from "./TaskCard";
 import ProgressBar from "./ProgressBar";
 import TaskDetailsModal from "./TaskDetailsModal";
-import { getTasks, createTask, deleteTask, cancelTask } from "../services/taskService";
+import { getTasks, createTask, deleteTask, cancelTask, updateStatus } from "../services/taskService";
 
 
 function TaskList() {
@@ -11,6 +11,11 @@ function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const changeStatus = async (id, status) => {
+  await updateStatus(id, status);
+  loadTasks();
+};
 
   const loadTasks = async () => {
     const data = await getTasks();
@@ -45,7 +50,7 @@ function TaskList() {
 
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-indigo-500 hover:bg-indigo-900 text-white px-5 py-3 rounded-lg shadow-lg transition"
+          className="flex items-center gap-2 bg-slate-800 hover:bg-indigo-900 text-white px-5 py-3 rounded-lg shadow-lg transition"
         >
           ➕ Ajouter une tâche
         </button>
@@ -63,6 +68,7 @@ function TaskList() {
           task={task}
           onDelete={removeTask}
           onCancel={cancel}
+          onUpdateStatus={changeStatus}
           onDetails={setSelectedTask}
         />
       ))}
